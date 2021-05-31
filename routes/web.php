@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+
+
 Route::group([ 'middleware' => ['guest']] ,function()
 {
     Route::get('/', function()
@@ -49,6 +51,18 @@ Route::group(
             Route::post('Filter_Classes', 'ClassroomController@Filter_Classes')->name('Filter_Classes');
 
         });
+
+
+        Route::group(['namespace' => 'Sections'], function () {
+
+            Route::resource('Sections', 'SectionController');
+
+            Route::get('/class_detailes/{id}', 'SectionController@getclasses');
+
+        });
+
+
+        Route::view('/add_parent', 'livewire.show_Form');
 
     });
 
